@@ -33,7 +33,7 @@ X = [ones(m, 1) X];
 p = X*all_theta';
 % since sigmoid function is monotonic and we only need max probability class of each example. below line can be omitted.
 % p = sigmoid();
-[value, p] = max(p, [], 2)
+[value, p] = max(p, [], 2);
 
 
 % =========================================================================

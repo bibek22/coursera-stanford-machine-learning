@@ -21,17 +21,24 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
-% add a bias to the examples
-X = [ones(m, 1) X];
+% size(p) = 5000 x 1
+% size(X) = 5000 x 401
+% m = 5000
+% num_labels = 10
 
-hidden = X*Theta1';
-hidden = [ones(m, 1) hidden];
-% this is required though. as the activation /is/ the amount of probability for that neuron.
-hidden = sigmoid(hidden);
-p = hidden*Theta2';
-% again, no need to sigmoid this. cause sigmoid is monotonic and we're just interested in getting the class for this example and no need for probability for now.
-% p = sigmoid(p);
-[trash, p] = max(p, [], 2);
+% size(Theta1) = 25 x 401
+% size(Theta2) = 10 x 26
+
+a1 = [ones(m, 1) X]; % add a0(1) to input
+
+
+a2 = sigmoid(a1 * Theta1');
+a2 = [ones(size(a2, 1), 1) a2]; % add a0(2) to result of the hidden layer 
+
+a3 = sigmoid(a2 * Theta2');
+
+
+[W, p] = max(a3, [], 2);
 
 % =========================================================================
 
